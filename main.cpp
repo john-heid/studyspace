@@ -1,21 +1,37 @@
 // studyspace.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
 #include <iostream>
+#include <vector>
+
+#include "Tree.h"
+
+// Tree Class
+    // Holds a root*
+    // Insertion
+    // Deletion
+    // Traversal
+    // Search
+// The 
+    
+
+
+
+
+
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
-    std::cout << "The way appears when you're out on the path" << std::endl;
+    std::vector<int> data{ 10, 20, 0, 15, 5, 12, 3, 6, 2, 9, 7, 17, 13, 12, 6, 16, 19 };
+    Tree oak{};
+    for (const auto& d : data) {
+        oak.insert(d);
+    }
+
+    std::vector<int> inorder_data{ oak.inorder() };
+
+    for (const auto& d : inorder_data) {
+        std::cout << d << " ";
+    }
+
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
