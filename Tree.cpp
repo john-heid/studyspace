@@ -1,5 +1,8 @@
 #include "Tree.h"
 
+#include <queue>
+#include <iostream>
+
 void Tree::insert(int val) {
 	Node* newNode = new Node(val);
 	if (!m_root) {
@@ -48,6 +51,48 @@ void Tree::helper_inorder(Node* curr, std::vector<int>& result) const {
 	if (curr->right) {
 		helper_inorder(curr->right, result);
 	}
-
 }
 
+void Tree::printTree() const {
+	Node* curr = m_root;
+	std::vector<std::vector<Node*>> levels{};
+	std::queue<Node*> q{};
+	q.push(m_root);
+	while (!q.empty()) {
+		int level_size = q.size();
+		std::vector<Node*> current_level{};
+
+		for (int i{ 0 }; i < level_size; ++i) {
+			Node* curr = q.front();
+			q.pop();
+			current_level.push_back(curr);
+
+			if (curr != nullptr) {
+				q.push(curr->left);
+				q.push(curr->right);
+			}
+		}
+		levels.push_back(current_level);
+	}
+	int padding_size = levels.size();
+	std::cout << padding_size;
+	for (const auto& level : levels) {
+		for (const auto& node : level) {
+			if (node) { 
+				std::cout << node->m_val << " ";
+			}
+			else { 
+				std::cout << "null ";
+			}
+		}
+		std::cout << std::endl;
+	}
+
+	// I need a
+	// Then a's children
+	//	 a
+	//	b c
+	// de fg
+
+
+}
