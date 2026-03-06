@@ -44,55 +44,51 @@ std::vector<int> Tree::inorder() const {
 
 }
 void Tree::helper_inorder(Node* curr, std::vector<int>& result) const {
-	if (curr->left) {
-		helper_inorder(curr->left, result);
-	}
+	if (curr->left) { helper_inorder(curr->left, result); }
 	result.push_back(curr->m_val);
-	if (curr->right) {
-		helper_inorder(curr->right, result);
-	}
+	if (curr->right) { helper_inorder(curr->right, result); }
 }
 
-void Tree::printTree() const {
-	Node* curr = m_root;
-	std::vector<std::vector<Node*>> levels{};
+std::vector<int> Tree::preorder() const {
+	Node* node{ m_root };
+	std::vector<int> result{};
+	helper_preorder(node, result);
+	return result;
+}
+void Tree::helper_preorder(Node* curr, std::vector<int>& result) const {
+	result.push_back(curr->m_val);
+	if (curr->left) { helper_preorder(curr->left, result); }
+	if (curr->right) { helper_preorder(curr->right, result); }
+}
+
+std::vector<std::vector<int>> Tree::levelorder() const {
+	if (m_root == nullptr) {
+		return {};
+	}
 	std::queue<Node*> q{};
+	std::vector<std::vector<int>> result{};
+
 	q.push(m_root);
+	int current_level{ 0 };
+
 	while (!q.empty()) {
-		int level_size = q.size();
-		std::vector<Node*> current_level{};
+		int len = q.size();
+		result.push_back({});
 
-		for (int i{ 0 }; i < level_size; ++i) {
-			Node* curr = q.front();
+		for (int i{ 0 }; i < len; ++i) {
+			Node* node = q.front();
 			q.pop();
-			current_level.push_back(curr);
 
-			if (curr != nullptr) {
-				q.push(curr->left);
-				q.push(curr->right);
+			result[current_level].push_back(node->m_val);
+
+			if (node->left != nullptr) {
+				q.push(node->left);
+			}
+			if (node->right != nullptr) {
+				q.push(node->right);
 			}
 		}
-		levels.push_back(current_level);
+		++current_level;
 	}
-	int padding_size = levels.size();
-	std::cout << padding_size;
-	for (const auto& level : levels) {
-		for (const auto& node : level) {
-			if (node) { 
-				std::cout << node->m_val << " ";
-			}
-			else { 
-				std::cout << "null ";
-			}
-		}
-		std::cout << std::endl;
-	}
-
-	// I need a
-	// Then a's children
-	//	 a
-	//	b c
-	// de fg
-
-
+	return result;
 }

@@ -14,7 +14,9 @@ class Tree
 public:
 	void insert(int);
 	std::vector<int> inorder() const; // inorder traversals terminate in an ascending order
-	void printTree() const; // level order traversal / breadth first search style
+	std::vector<std::vector<int>> levelorder() const; // level order traversal / breadth first search style
+	std::vector<int> preorder() const;
+
 	// get degree get level etc
 	// Print Tree
 		// Probably use the depth of the tree to determine spacing visually
@@ -24,5 +26,6 @@ private:
 
 	// Member Functions
 	void helper_inorder(Node* curr, std::vector<int>& result) const;
+	void helper_preorder(Node* curr, std::vector<int>& result) const;
 };
 

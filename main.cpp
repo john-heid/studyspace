@@ -8,6 +8,22 @@
 // Create dummy data
 
 
+std::ostream& operator<<(std::ostream& out, std::vector<int>& data) {
+    for (const auto& d : data) {
+        out << d << " ";
+    }
+    return out;
+}
+std::ostream& operator<<(std::ostream& out, std::vector<std::vector<int>>& datas) {
+    for (const auto& data : datas) {
+        std::cout << std::endl;
+        for (const auto& d : data) {
+            out << d << " ";
+        }
+    }
+    return out;
+}
+
 
 int main()
 {
@@ -16,6 +32,17 @@ int main()
     for (const auto& d : data) {
         oak.insert(d);
     }
-    oak.printTree();
+
+    std::vector<int> inorder_data = oak.inorder();
+    std::vector<int> preorder_data = oak.preorder();
+    std::vector<std::vector<int>> levelorder_data = oak.levelorder();
+
+    std::cout << "inorder:      " << inorder_data << std::endl;
+    std::cout << "preorder:     " << preorder_data << std::endl;
+    std::cout << "levelorder:   " << levelorder_data << std::endl;
+
+    
+
+
 
 }
